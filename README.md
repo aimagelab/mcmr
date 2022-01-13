@@ -80,11 +80,13 @@ pip install "git+https://github.com/facebookresearch/pytorch3d.git@v0.4.0"
 ## Citation
 If you find this repository useful for your research, please cite the following paper:
 ```bibtex
-@article{simoni2021multi,
+@inproceedings{simoni2021multi,
   title={Multi-Category Mesh Reconstruction From Image Collections},
   author={Simoni, Alessandro and Pini, Stefano and Vezzani, Roberto and Cucchiara, Rita},
-  journal={arXiv preprint arXiv:2110.11256},
-  year={2021}
+  booktitle={2021 International Conference on 3D Vision (3DV)},
+  pages={1321--1330},
+  year={2021},
+  organization={IEEE}
 }
 ```
 
