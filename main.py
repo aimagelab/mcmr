@@ -17,14 +17,14 @@ from torch.utils.tensorboard import SummaryWriter
 
 from datasets.cub.dataset import CUBDataset
 from datasets.pascal3d.dataset import PascalDataset
-from datasets.pascal3d.split_train_test_VOC import cad_num_per_class
+from datasets.pascal3d.split_train_val_test_VOC import cad_num_per_class
 from models.inceptionV3 import InceptionV3
-from utils.losses import kp_l2_loss, deform_l2reg, camera_loss, quat_reg, GraphLaplacianLoss
 from models.mcmr import MCMRNet
-from utils.metrics import get_IoU, get_L1, get_SSIM, get_FID, compute_mean_and_cov, get_feat
 from models.renderer_softras import NeuralRenderer as SOFTRAS_renderer
 from utils.geometry import y_rot
 from utils.lab_color import rgb_to_lab, lab_to_rgb
+from utils.losses import kp_l2_loss, deform_l2reg, camera_loss, quat_reg, GraphLaplacianLoss
+from utils.metrics import get_IoU, get_L1, get_SSIM, get_FID, compute_mean_and_cov, get_feat
 from utils.transformations import quaternion_matrix, euler_from_matrix
 from utils.visualize_results import vis_results
 
@@ -206,7 +206,7 @@ class MultiShapePredictor():
 
     def define_renderer(self):
         """
-        Initialize renderer and useful variables for rendering (faces, default texture for mean shape)
+        Initialize renderer and useful variables for rendering (faces, default texture for meanshape)
 
         Returns:
         """
@@ -613,7 +613,7 @@ class MultiShapePredictor():
         epoch_iter = 0
 
         if phase == 'train' and self.epoch in self.args.sdf_subdivide_steps:
-            print(f'Applying subdivision of the mean shape @ (before) Epoch {self.epoch}')
+            print(f'Applying subdivision of the meanshape @ (before) Epoch {self.epoch}')
             _ = self.G_net.subdivide_mesh()
             if self.args.double_subdivide:
                 _ = self.G_net.subdivide_mesh()
@@ -675,7 +675,7 @@ class MultiShapePredictor():
             if self.args.single_mean_shape:
                 input_idxs = torch.zeros_like(batch['class_idx'])
 
-            # Get mean shape
+            # Get meanshape
             mean_shape = self.G_net.get_mean_shape()
             mean_shape = mean_shape.unsqueeze(0).expand(batch_size, -1, -1, -1)
             if not self.args.use_learned_class:
@@ -990,7 +990,7 @@ class MultiShapePredictor():
             print(f'{phase.capitalize()} time/itr '
                   f'{((global_iter_end_time - global_iter_start_time) / (len(self.dataloader[phase]))):.2g} s')
 
-            # Visualize predicted texture, textured mean shape and deformed mean shape
+            # Visualize predicted texture, textured meanshape and deformed meanshape
             if (not self.args.disable_display_visuals) and ((self.epoch % self.args.display_freq == 0) or
                                                             (phase == 'test')):
                 if phase == 'train':
@@ -1031,7 +1031,7 @@ class MultiShapePredictor():
                     shape_light_frontal = shape_light_frontal.detach().cpu()
                     shape_light_frontal = torch.clamp(shape_light_frontal, 0, 1)
 
-                # Get mean shape with light effects (if present)
+                # Get meanshape with light effects (if present)
                 self.renderer[phase].set_lighting(light_direction=[0, 0, -1])
                 mean_shape_pred, _ = self.renderer[phase](mean_shape, faces, default_texture)
                 mean_shape_pred = mean_shape_pred.detach().cpu()
@@ -1210,42 +1210,41 @@ if __name__ == '__main__':
     parser = ArgumentParser()
 
     # Losses
-    parser.add_argument('--mask_loss_wt', type=float, default=2., help='mask loss weight')
-    parser.add_argument('--cam_loss_wt', type=float, default=2., help='weights to camera loss')
-    parser.add_argument('--cam_reg_wt', type=float, default=0.1, help='weights to camera regularization')
-    parser.add_argument('--deform_reg_wt', type=float, default=10., help='regularization to deformation')
-    parser.add_argument('--laplacian_wt', type=float, default=30., help='weights to laplacian smoothness prior')
-    parser.add_argument('--laplacian_delta_wt', type=float, default=30.,
+    parser.add_argument('--mask_loss_wt', type=float, default=0., help='mask loss weight')
+    parser.add_argument('--cam_loss_wt', type=float, default=0., help='weights to camera loss')
+    parser.add_argument('--cam_reg_wt', type=float, default=0., help='weights to camera regularization')
+    parser.add_argument('--deform_reg_wt', type=float, default=0., help='regularization to deformation')
+    parser.add_argument('--laplacian_wt', type=float, default=0., help='weights to laplacian smoothness prior')
+    parser.add_argument('--laplacian_delta_wt', type=float, default=0.,
                         help='weights to deformations laplacian smoothness prior')
-    parser.add_argument('--graph_laplacian_wt', type=float, default=0.5,
+    parser.add_argument('--graph_laplacian_wt', type=float, default=0.,
                         help='weights to graph laplacian smoothness prior')
-    parser.add_argument('--tex_percept_loss_wt', type=float, default=1., help='weights to tex perceptual loss')
-    parser.add_argument('--tex_color_loss_wt', type=float, default=1., help='weights to tex color loss')
-    parser.add_argument('--tex_pixel_loss_wt', type=float, default=1., help='weights to tex pixel loss')
+    parser.add_argument('--tex_percept_loss_wt', type=float, default=0., help='weights to tex perceptual loss')
+    parser.add_argument('--tex_color_loss_wt', type=float, default=0., help='weights to tex color loss')
+    parser.add_argument('--tex_pixel_loss_wt', type=float, default=0., help='weights to tex pixel loss')
     parser.add_argument('--use_learned_class', action='store_true',
-                        help='learn-based selection of cad/class mean shape')
+                        help='learn-based selection of cad/class meanshape')
     parser.add_argument('--num_learned_shapes', type=int, default=None,
-                        help='Number of learnable mean shapes (if None use number of classes)')
+                        help='number of learnable meanshapes (if None use number of classes)')
     parser.add_argument('--class_loss_wt', type=float, default=0., help='weights to class loss')
 
     # Renderer
     parser.add_argument('--texture_type', type=str, default='surface',
                         help='texture type (`surface` (uv image) or `vertex` (vertex color)')
-    parser.add_argument('--color_space', type=str, default='rgb', help='color space (`rgb` (default) or `lab`')
+    parser.add_argument('--color_space', type=str, default='rgb', help='color space (`rgb` or `lab`')
     parser.add_argument('--tex_size', type=int, default=6, help='texture resolution per face')
 
     # Dataset
-    parser.add_argument('--dataset_name', type=str, default='pascal', help='dataset name [pascal, cub]')
+    parser.add_argument('--dataset_name', type=str, help='dataset name [pascal, cub]')
     parser.add_argument('--dataset_dir', type=Path, help='dataset directory location')
     parser.add_argument('--classes', type=str, nargs='+',
-                        help='which PASCAL classes are used during training ["all" or list of class names]')
-    parser.add_argument('--single_mean_shape', action='store_true', help='force to use a single mean shape')
-    parser.add_argument('--sub_classes', action='store_true',
-                        help='train on PASCAL class 3D models sub-classes ["all" or list of class names]')
+                        help='which classes are used during training ["all" or list of class names]')
+    parser.add_argument('--single_mean_shape', action='store_true', help='force to use a single meanshape')
+    parser.add_argument('--sub_classes', action='store_true', help='train on PASCAL3D+ 3D models sub-classes')
     parser.add_argument('--disable_aug', action='store_true', help='disable data augmentation during training')
-    parser.add_argument('--demo', action='store_true', help='load 100 samples in DEBUG mode')
     parser.add_argument('--cmr_mode', action='store_true',
-                        help='enable cmr mode for fair comparison (maskrcnn masks and cmr gt masks during testing)')
+                        help='enable cmr_mode for PASCAL3D+ fair comparison (maskrcnn and cmr gt masks)')
+    parser.add_argument('--demo', action='store_true', help='load 100 samples in DEBUG mode')
 
     # Model
     parser.add_argument('--img_size', type=int, default=256, help='input image resolution')
@@ -1259,20 +1258,20 @@ if __name__ == '__main__':
     parser.add_argument('--norm_mode', type=str, default='none', help='SPADE norm mode [batch, instance, none]')
     parser.add_argument('--subdivide', type=int, default=4,
                         help='# to subdivide icosahedron, 8=642verts, 16=2562 verts')
+    parser.add_argument('--sdf_subdivide_steps', type=str, default='',
+                        help='list of epochs when subdivision is applied to meanshapes. '
+                             'Default: "" (none). Example: "100,200,300"')
     parser.add_argument('--double_subdivide', action='store_true',
                         help='if true activate double subdivision (e.g. 4 to 16)')
-    parser.add_argument('--sdf_subdivide_steps', type=str, default='',
-                        help='list of epochs when subdivision is applied to mean shapes. Default: "" (none). '
-                             'Example: "100,200,300"')
-    parser.add_argument('--sdf_subdivide_update_wt', action='store_true', help='activate deformation loss weight decay')
+    parser.add_argument('--sdf_subdivide_update_wt', action='store_true',
+                        help='activate deformation loss weight decay after mesh subdivision')
 
     # Training
     parser.add_argument('--num_epochs', type=int, default=500, help='number of epochs to train')
     parser.add_argument('--batch_size', type=int, default=16, help='size of minibatches')
-    parser.add_argument('--pretrained_weights', type=Path, default='',
-                        help='pretrained weights path')
+    parser.add_argument('--pretrained_weights', type=Path, default='', help='pretrained weights directory')
     parser.add_argument('--G_learning_rate', type=float, default=1e-4, help='generator learning rate')
-    parser.add_argument('--G_lr_steps', type=int, nargs='+', default=-1, help='learning rate epoch steps')
+    parser.add_argument('--G_lr_steps', type=int, nargs='+', default=351, help='learning rate epoch steps')
     parser.add_argument('--G_lr_steps_values', type=float, nargs='+', default=1e-5,
                         help='learning rate epoch steps values')
     parser.add_argument('--use_sgd', action='store_true',
@@ -1297,7 +1296,7 @@ if __name__ == '__main__':
                         help='if true save a selection of qualitative results')
     parser.add_argument('--save_dir', type=Path, default='./visual_results')
 
-    parser.add_argument('--is_training', action='store_true', help='is training?')
+    parser.add_argument('--is_training', action='store_true', help='enable training mode')
 
     parser.add_argument('--faster', action='store_true', help='disable deterministic mode')
 
