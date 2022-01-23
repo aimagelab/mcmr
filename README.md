@@ -62,14 +62,138 @@ pip install fvcore iopath
 pip install "git+https://github.com/facebookresearch/pytorch3d.git@v0.4.0"
 ```
 
-### Updates
+## Dataset preparation
+Please follow the instructions from [mcmr Data Preparation](datasets/DATASET.md).
+
+## Training
+### Pascal3D+
+Run the following script:
+```bash
+python main.py --dataset_name pascal \
+               --dataset_dir your-folder/datasets/PASCAL_final \
+               --classes <class-names> \
+               --sub_classes \                                 # train on PASCAL3D+ 3D models sub-classes
+               --single_mean_shape \                           # use single meanshape training
+               --cmr_mode \                                    # use GT+MaskRCNN instead of GT+PointRend masks
+               --subdivide 4 \                                 # starting mesh subdivision level
+               --sdf_subdivide_steps 351 \                     # mesh subdivision epoch steps
+               --use_learned_class \                           # activate unsupervised shape selection module
+               --num_learned_meanshapes <num-of-meanshapes> \  # set number of meanshapes
+               --checkpoint_dir <checkpoint-directory> \
+               --log_dir <log-directory> \
+               --pretrained_weights <weights-file> \           # resume from pre-trained weights
+               --cam_loss_wt 20.0 \
+               --cam_reg_wt 0.1 \
+               --mask_loss_wt 100.0 \
+               --deform_reg_wt 0.05 \
+               --laplacian_wt 6.0 \             
+               --laplacian_delta_wt 1.8 \
+               --graph_laplacian_wt 0. \
+               --tex_percept_loss_wt 0.8 \
+               --tex_color_loss_wt 0.03 \
+               --tex_pixel_loss_wt 0.005 \
+               --is_training \                                  # activate training mode
+               (--faster)                                       # disable deterministic mode
+```
+### CUB
+Run the following script:
+```bash
+python main.py --dataset_name cub \
+               --dataset_dir your-folder/datasets/UCMR_CUB_data/cub/ \
+               --classes all \
+               --single_mean_shape \                           # use single meanshape training
+               --subdivide 4 \                                 # starting mesh subdivision level
+               --sdf_subdivide_steps 351 \                     # mesh subdivision epoch steps
+               --use_learned_class \                           # activate unsupervised shape selection module
+               --num_learned_meanshapes <num-of-meanshapes> \  # set number of meanshapes
+               --checkpoint_dir <checkpoint-directory> \
+               --log_dir <log-directory> \
+               --pretrained_weights <weights-file> \           # resume from pre-trained weights
+               --cam_loss_wt 2.0 \
+               --cam_reg_wt 0.1 \
+               --mask_loss_wt 20.0 \
+               --deform_reg_wt 0.005 \
+               --laplacian_wt 1.2 \             
+               --laplacian_delta_wt 0.18 \
+               --graph_laplacian_wt 0. \
+               --tex_percept_loss_wt 3.2 \
+               --tex_color_loss_wt 0.12 \
+               --tex_pixel_loss_wt 0.02 \
+               --is_training \                                  # activate training mode
+               (--faster)                                       # disable deterministic mode
+```
+
+## Testing with pre-trained weights
+Original paper experiments can be reproduced as follows:
+1) Download pre-trained weights from [mcmr Model Zoo](models/MODELZOO.md).
+2) Run the testing script as follows:
+
+#### 2.1. Pascal3D+:
+```bash
+python main.py --dataset_name pascal \
+               --dataset_dir your-folder/datasets/PASCAL_final \
+               --classes <class-names> \
+               --sub_classes \                                 # activate intra-class variation
+               --cmr_mode \                                    # use of GT+MaskRCNN masks instead of GT+PointRend
+               --subdivide 4 \                                 # starting mesh subdivision level
+               --sdf_subdivide_steps 351 \                     # mesh subdivision epoch steps
+               --use_learned_class \
+               --num_learned_meanshapes <num-of-meanshapes> \  # set number of meanshapes
+               --checkpoint_dir <checkpoint-directory> \
+               --log_dir <log-directory> \
+               --pretrained_weights <weights-file> \           # load pre-trained weights for testing
+               --cam_loss_wt 20.0 \
+               --cam_reg_wt 0.1 \
+               --mask_loss_wt 100.0 \
+               --deform_reg_wt 0.05 \
+               --laplacian_wt 6.0 \             
+               --laplacian_delta_wt 1.8 \
+               --graph_laplacian_wt 0. \
+               --tex_percept_loss_wt 0.8 \
+               --tex_color_loss_wt 0.03 \
+               --tex_pixel_loss_wt 0.005 \
+               --save_dir <save-directory> \                    # directory to save qualitative results
+               --save_results \                                 # activate qualitative results saving
+               --qualitative_results \                          # activate qualitative results with weighted meanshape saving 
+               (--faster)                                       # disable deterministic mode
+```
+#### 2.2. CUB:
+```bash
+python main.py --dataset_name cub \
+               --dataset_dir your-folder/datasets/UCMR_CUB_data/cub/ \
+               --classes all \
+               --single_mean_shape \                           # use single meanshape training
+               --subdivide 4 \                                 # starting mesh subdivision level
+               --sdf_subdivide_steps 351 \                     # mesh subdivision epoch steps
+               --use_learned_class \                           # activate unsupervised shape selection module
+               --num_learned_meanshapes <num-of-meanshapes> \  # set number of meanshapes
+               --checkpoint_dir <checkpoint-directory> \
+               --log_dir <log-directory> \
+               --pretrained_weights <weights-file> \           # load pre-trained weights for testing
+               --cam_loss_wt 2.0 \
+               --cam_reg_wt 0.1 \
+               --mask_loss_wt 20.0 \
+               --deform_reg_wt 0.005 \
+               --laplacian_wt 1.2 \             
+               --laplacian_delta_wt 0.18 \
+               --graph_laplacian_wt 0. \
+               --tex_percept_loss_wt 3.2 \
+               --tex_color_loss_wt 0.12 \
+               --tex_pixel_loss_wt 0.02 \
+               --save_dir <save-directory> \                    # directory to save qualitative results
+               --save_results \                                 # activate qualitative results saving
+               --qualitative_results \                          # activate qualitative results with weighted meanshape saving 
+               (--faster)                                       # disable deterministic mode
+```
+
+## Updates
 - [x] Add model implementation
 - [x] Add dataloader implementation
 - [x] Add train/test scripts
-- [ ] Add dataset link
-- [ ] Add dataset preprocessing scripts and/or link to already preprocessed data
-- [ ] Add Detectron2 installation instructions (for preprocessing)
-- [ ] Add pretrained models
+- [x] Add preprocessed dataset request instructions
+- [x] Add dataset preprocessing instructions and scripts
+- [x] Add train/test instructions
+- [x] Add pretrained models
 
 ## Authors
 * **Alessandro Simoni** - [alexj94](https://github.com/alexj94)
@@ -80,11 +204,13 @@ pip install "git+https://github.com/facebookresearch/pytorch3d.git@v0.4.0"
 ## Citation
 If you find this repository useful for your research, please cite the following paper:
 ```bibtex
-@article{simoni2021multi,
+@inproceedings{simoni2021multi,
   title={Multi-Category Mesh Reconstruction From Image Collections},
   author={Simoni, Alessandro and Pini, Stefano and Vezzani, Roberto and Cucchiara, Rita},
-  journal={arXiv preprint arXiv:2110.11256},
-  year={2021}
+  booktitle={2021 International Conference on 3D Vision (3DV)},
+  pages={1321--1330},
+  year={2021},
+  organization={IEEE}
 }
 ```
 
