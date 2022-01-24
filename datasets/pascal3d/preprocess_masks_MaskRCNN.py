@@ -1,14 +1,10 @@
-from collections import OrderedDict
-
 import cv2
 import numpy as np
-import yaml
 from detectron2 import model_zoo
 from detectron2.config import get_cfg
 from detectron2.engine import DefaultPredictor
 
-from datasets.pascal3d.preprocess import pascal_classes_to_COCO, CustomDumper
-from utils.geometry import pascal_vpoint_to_extrinsics, intrinsic_matrix
+from datasets.pascal3d.preprocess import pascal_classes_to_COCO
 
 
 def generate_MaskRCNN_masks(dataset_dir, results_dir):
@@ -22,10 +18,9 @@ def generate_MaskRCNN_masks(dataset_dir, results_dir):
 
     for pascal_class, COCO_ids in pascal_classes_to_COCO.items():
         result_dir = results_dir / f'{pascal_class}'
-        for sub_dir in ['images', 'annotations', 'masks']:
-            curr_dir = result_dir / sub_dir
-            if not curr_dir.is_dir():
-                curr_dir.mkdir(parents=True, exist_ok=True)
+        masks_dir = result_dir / 'masks'
+        if not masks_dir.is_dir():
+            masks_dir.mkdir(parents=True, exist_ok=True)
 
         with open(str(dataset_dir / 'annotations' / f'pascal3d_{pascal_class}_keypoints.txt'), 'r') as fp:
             pascal_annotations = fp.readlines()
@@ -33,43 +28,8 @@ def generate_MaskRCNN_masks(dataset_dir, results_dir):
                 line = line.replace('\n', '')
                 pascal_annotations[i] = line.split(',')
 
-        with open(str(dataset_dir / 'annotations' / f'pascal3d_{pascal_class}_difficulty.txt'), 'r') as fp:
-            pascal_difficulty_annotations = fp.readlines()
-            for i, line in enumerate(pascal_difficulty_annotations):
-                line = line.replace('\n', '')
-                pascal_difficulty_annotations[i] = line.split(',')
-            pascal_difficulty_annotations = np.asarray(pascal_difficulty_annotations)
-
-        CustomDumper.add_representer(OrderedDict, CustomDumper.represent_dict_preserve_order)
-
         for n, annot in enumerate(pascal_annotations):
             img = cv2.imread(str(dataset_dir / 'images' / f'{pascal_class}_{annot[1]}' / annot[2]))
-
-            # object CAD
-            cad_id = int(annot[6]) - 1
-
-            # object bbox
-            bbox = [int(annot[7]), int(annot[8]), int(annot[9]), int(annot[10])]
-            if bbox[0] < 0:
-                bbox[0] = 0
-            if bbox[1] < 0:
-                bbox[1] = 0
-            if bbox[2] >= img.shape[1]:
-                bbox[2] = img.shape[1] - 1
-            if bbox[3] >= img.shape[0]:
-                bbox[3] = img.shape[0] - 1
-
-            # object pose
-            az = float(annot[11])
-            el = float(annot[12])
-            # theta = float(annot[13])
-            rad = float(annot[14])
-            cx, cy = float(annot[19]), float(annot[20])
-
-            # object occlusion
-            occluded = int(annot[25])
-            truncated = int(annot[26])
-            difficult = int(pascal_difficulty_annotations[n, 1])
 
             # Keypoints
             num_kps = (len(annot) - 27) // 3
@@ -84,32 +44,8 @@ def generate_MaskRCNN_masks(dataset_dir, results_dir):
                 else:
                     kpoints[k, 2] = 0
 
-            if len(list((result_dir / 'images').glob(annot[2]))) == 0:
-                cv2.imwrite(str(result_dir / 'images' / annot[2]), img)
-
-            # compute correct intrinsic and extrinsic matrices
-            K = intrinsic_matrix(fx=3000, fy=3000, cx=cx, cy=cy)
-            extrinsic = pascal_vpoint_to_extrinsics(az_deg=az, el_deg=el, radius=rad)
-
-            # create annotation file
-            new_annot = OrderedDict()
-            new_annot['image_name'] = annot[2]
-            new_annot['image_size'] = [img.shape[0], img.shape[1], img.shape[2]]
-            new_annot['pascal_class'] = pascal_class
-            new_annot['cad_idx'] = cad_id
-            new_annot['occluded'] = occluded
-            new_annot['truncated'] = truncated
-            new_annot['difficult'] = difficult
-            new_annot['bbox'] = bbox
-            new_annot['kpoints_2d'] = [[int(kp[0]), int(kp[1]), int(kp[2])] for kp in kpoints]
-            new_annot['intrinsic'] = [[float(val[i]) for i in range(len(val))] for val in K]
-            new_annot['extrinsic'] = [[float(val[i]) for i in range(len(val))] for val in extrinsic]
-
-            with open(str(result_dir / 'annotations' / f'{n:05}.yaml'), 'w') as fp:
-                yaml.dump(new_annot, fp, Dumper=CustomDumper)
-
             # compute and save object mask
-            kpoints = new_annot['kpoints_2d']
+            kpoints = [[int(kp[0]), int(kp[1]), int(kp[2])] for kp in kpoints]
             outputs = predictor(img)
             masked_img = np.zeros(img.shape[:2])
             masks = []
