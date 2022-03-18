@@ -14,12 +14,16 @@ At the end you should obtain a ```your-folder/datasets``` directory organized as
 
 
 ## Pascal3D+
-### <ins>Download preprocessed data</ins>
+
+1. Follow option A) or B) to have preprocessed data of Pascal3D+.
+2. Download annotations of _car_ class from [U-CMR](https://github.com/shubham-goel/ucmr) using this [link](https://drive.google.com/file/d/1fVSu926c-UOM8PUDZJKqHH3ocX3UOJ7i/view?usp=sharing) and unzip them in ```your-folder/datasets```. These data are used when testing on the _car_ class to reproduce results of Table 2 in the paper.
+
+### <ins> A) Download preprocessed data</ins>
 To obtain the already preprocessed data, please send an email to [Alessandro Simoni](https://aimagelab.ing.unimore.it/imagelab/person.asp?idpersona=125) stating:
 1) Your name, title and affiliation
 2) Your intended use of the data
 
-### <ins>Preprocess data yourself</ins>
+### <ins>B) Preprocess data yourself</ins>
 Install [Detectron2](https://github.com/facebookresearch/detectron2/blob/main/INSTALL.md) (v0.3) in your environment running this line:
 ```bash
 python -m pip install detectron2==0.3 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu102/torch1.5/index.html
