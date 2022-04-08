@@ -4,8 +4,28 @@ import cv2
 import numpy as np
 import yaml
 
-from datasets.pascal3d.preprocess import pascal_classes_to_COCO, CustomDumper
 from utils.geometry import pascal_vpoint_to_extrinsics, intrinsic_matrix
+
+pascal_classes_to_COCO = {
+    'aeroplane': [4],
+    'bicycle': [1],
+    'boat': [8],
+    'bottle': [39],
+    'bus': [5],
+    'car': [2, 7],
+    'chair': [56],
+    'diningtable': [60],
+    'motorbike': [3],
+    'sofa': [57],
+    'train': [6],
+    'tvmonitor': [62]
+}
+
+
+class CustomDumper(yaml.Dumper):
+    # Super neat hack to preserve the mapping key order. See https://stackoverflow.com/a/52621703/1497385
+    def represent_dict_preserve_order(self, data):
+        return self.represent_dict(data.items())
 
 
 def process_annotations(dataset_dir, results_dir):

@@ -4,7 +4,20 @@ from detectron2 import model_zoo
 from detectron2.config import get_cfg
 from detectron2.engine import DefaultPredictor
 
-from datasets.pascal3d.preprocess import pascal_classes_to_COCO
+pascal_classes_to_COCO = {
+    'aeroplane': [4],
+    'bicycle': [1],
+    'boat': [8],
+    'bottle': [39],
+    'bus': [5],
+    'car': [2, 7],
+    'chair': [56],
+    'diningtable': [60],
+    'motorbike': [3],
+    'sofa': [57],
+    'train': [6],
+    'tvmonitor': [62]
+}
 
 
 def generate_MaskRCNN_masks(dataset_dir, results_dir):

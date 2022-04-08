@@ -4,7 +4,20 @@ import yaml
 from roipoly import RoiPoly
 from scipy.io import loadmat
 
-from datasets.pascal3d.preprocess import pascal_classes_id as pascal_classes
+pascal_classes_id = {
+    1: 'aeroplane',
+    2: 'bicycle',
+    4: 'boat',
+    5: 'bottle',
+    6: 'bus',
+    7: 'car',
+    9: 'chair',
+    11: 'diningtable',
+    14: 'motorbike',
+    18: 'sofa',
+    19: 'train',
+    20: 'tvmonitor'
+}
 
 
 def process_CMR_masks(dataset_dir, results_dir):

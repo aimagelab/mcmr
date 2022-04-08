@@ -2,7 +2,20 @@ import cv2
 import numpy as np
 from tqdm import tqdm
 
-from datasets.pascal3d.preprocess import pascal_classes
+pascal_classes = [
+    'aeroplane',
+    'bicycle',
+    'boat',
+    'bottle',
+    'bus',
+    'car',
+    'chair',
+    'diningtable',
+    'motorbike',
+    'sofa',
+    'train',
+    'tvmonitor'
+]
 
 
 def process_VOC_masks(dataset_dir, results_dir):
