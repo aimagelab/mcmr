@@ -1271,8 +1271,8 @@ if __name__ == '__main__':
     parser.add_argument('--batch_size', type=int, default=16, help='size of minibatches')
     parser.add_argument('--pretrained_weights', type=Path, default='', help='pretrained weights directory')
     parser.add_argument('--G_learning_rate', type=float, default=1e-4, help='generator learning rate')
-    parser.add_argument('--G_lr_steps', type=int, nargs='+', default=351, help='learning rate epoch steps')
-    parser.add_argument('--G_lr_steps_values', type=float, nargs='+', default=1e-5,
+    parser.add_argument('--G_lr_steps', type=int, nargs='+', default=[351], help='learning rate epoch steps')
+    parser.add_argument('--G_lr_steps_values', type=float, nargs='+', default=[1e-5],
                         help='learning rate epoch steps values')
     parser.add_argument('--use_sgd', action='store_true',
                         help='if true uses sgd instead of adam, beta1 is used as momentum')
