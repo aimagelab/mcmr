@@ -21,6 +21,7 @@ ext_modules=[
             '--generate-code=arch=compute_70,code=sm_70',
             '--generate-code=arch=compute_72,code=sm_72',
             '--generate-code=arch=compute_75,code=sm_75',
+            '--generate-code=arch=compute_86,code=sm_86',
         ]}
                   ),
     CUDAExtension('soft_renderer.cuda.create_texture_image', [
@@ -39,6 +40,7 @@ ext_modules=[
             '--generate-code=arch=compute_70,code=sm_70',
             '--generate-code=arch=compute_72,code=sm_72',
             '--generate-code=arch=compute_75,code=sm_75',
+            '--generate-code=arch=compute_86,code=sm_86',
         ]}
                   ),
     CUDAExtension('soft_renderer.cuda.soft_rasterize', [
@@ -57,6 +59,7 @@ ext_modules=[
             '--generate-code=arch=compute_70,code=sm_70',
             '--generate-code=arch=compute_72,code=sm_72',
             '--generate-code=arch=compute_75,code=sm_75',
+            '--generate-code=arch=compute_86,code=sm_86',
         ]}
                   ),
     CUDAExtension('soft_renderer.cuda.voxelization', [
@@ -75,6 +78,7 @@ ext_modules=[
             '--generate-code=arch=compute_70,code=sm_70',
             '--generate-code=arch=compute_72,code=sm_72',
             '--generate-code=arch=compute_75,code=sm_75',
+            '--generate-code=arch=compute_86,code=sm_86',
         ]}
                   ),
     ]
