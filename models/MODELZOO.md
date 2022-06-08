@@ -95,6 +95,8 @@ Released pre-trained models for all main paper experiments.
 </tbody>
 </table>
 
+To compute the 3D IoU metric for Pascal3D+, click [here](https://drive.google.com/file/d/1zrj-QtxfT2cX7N7YxljMgxoCnudjHahl/view?usp=sharing) and download the MatLab code. We started from the [DRC](https://github.com/shubhtuls/drc) repo and adapt the code for reading our generated mat files containing the predicted meshes.
+
 ## CUB
 <table>
 <!-- TABLE BODY -->
