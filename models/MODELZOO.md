@@ -90,12 +90,12 @@ Released pre-trained models for all main paper experiments.
 <td align="center">GT + PointRend</td>
 <td align="center">Table 4</td>
 <td align="center">0.425</td>
-<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_4/12_pascal_classes_12_meanshape/net_latest.pth">model</a></td>
+<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_4/12_pascal_classes_12_meanshapes/net_latest.pth">model</a></td>
 </tr>
 </tbody>
 </table>
 
-To compute the 3D IoU metric for Pascal3D+, click [here](https://drive.google.com/file/d/1zrj-QtxfT2cX7N7YxljMgxoCnudjHahl/view?usp=sharing) and download the MatLab code. We started from the [DRC](https://github.com/shubhtuls/drc) repo and adapt the code for reading our generated mat files containing the predicted meshes.
+To compute the 3D IoU metric for Pascal3D+, click [here](https://ailb-web.ing.unimore.it/publicfiles/drive/3DV%202021%20-%20mcmr/drc-code-for-mcmr.zip) and download the MatLab code. We started from the [DRC](https://github.com/shubhtuls/drc) repo and adapt the code for reading our generated mat files containing the predicted meshes.
 
 ## CUB
 <table>
@@ -124,7 +124,7 @@ To compute the 3D IoU metric for Pascal3D+, click [here](https://drive.google.co
 <td align="center">GT</td>
 <td align="center">Table 3</td>
 <td align="center">0.642</td>
-<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_3/CUB_14_meanshape/net_latest.pth">model</a></td>
+<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_3/CUB_14_meanshapes/net_latest.pth">model</a></td>
 </tr>
 </tbody>
 </table>
