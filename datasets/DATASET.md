@@ -3,7 +3,7 @@ Create a ```your-folder/datasets``` directory.
 
 ## CUB
 1) Download [CUB](http://www.vision.caltech.edu/visipedia-data/CUB-200-2011/CUB_200_2011.tgz) dataset and unzip it in ```your-folder/datasets```.
-2) Download annotations from [U-CMR](https://github.com/shubham-goel/ucmr) using this [link](https://drive.google.com/file/d/1kNGuBpBlUFhBeU0ycqGQD1HGwKQvCZ-y/view?usp=sharing) and unzip them in ```your-folder/datasets```.
+2) Download annotations from [U-CMR](https://github.com/shubham-goel/ucmr) using this [link](https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/UCMR_CUB_data.zip) and unzip them in ```your-folder/datasets```.
 
 At the end you should obtain a ```your-folder/datasets``` directory organized as follows:
 ```
@@ -16,7 +16,7 @@ At the end you should obtain a ```your-folder/datasets``` directory organized as
 ## Pascal3D+
 
 1. Follow option A) or B) to have preprocessed data of Pascal3D+.
-2. Download annotations of _car_ class from [U-CMR](https://github.com/shubham-goel/ucmr) using this [link](https://drive.google.com/file/d/1fVSu926c-UOM8PUDZJKqHH3ocX3UOJ7i/view?usp=sharing) and unzip them in ```your-folder/datasets```. These data are used when testing on the _car_ class to reproduce results of Table 2 in the paper.
+2. Download annotations of _car_ class from [U-CMR](https://github.com/shubham-goel/ucmr) using this [link](https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/UCMR_P3D_data.zip) and unzip them in ```your-folder/datasets```. These data are used when testing on the _car_ class to reproduce results of Table 2 in the paper.
 
 ### <ins> A) Download preprocessed data</ins>
 To obtain the already preprocessed data, please send an email to [Alessandro Simoni](https://aimagelab.ing.unimore.it/imagelab/person.asp?idpersona=125) stating:
@@ -35,7 +35,7 @@ python -m pip install detectron2==0.3 -f https://dl.fbaipublicfiles.com/detectro
 4) Copy and paste the content of ```Images``` folder of the unzipped dataset in ```your-folder/datasets/PASCAL3D+/images```.
 5) Copy and paste ```PASCAL/VOCdevkit/VOC2012/SegmentationClass``` folder of the unzipped dataset in ```your-folder/datasets/PASCAL3D+```.
 6) Copy and paste ```PASCAL/VOCdevkit/VOC2012/SegmentationObject``` folder of the unzipped dataset in ```your-folder/datasets/PASCAL3D+```.
-7) Download the [annotations/masks](https://drive.google.com/file/d/1FU5a__9K3cq5aPn1OX8ZOHoJ_nQqOLDZ/view?usp=sharing) folder and unzip it into ```your-folder/datasets/PASCAL3D+```. 
+7) Download the [annotations/masks]((https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/PASCAL_data.zip) folder and unzip it into ```your-folder/datasets/PASCAL3D+```. 
 
 At the end you should obtain a ```your-folder/datasets/PASCAL3D+``` directory organized as follows:
 ```
