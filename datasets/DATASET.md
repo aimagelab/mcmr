@@ -35,7 +35,7 @@ python -m pip install detectron2==0.3 -f https://dl.fbaipublicfiles.com/detectro
 4) Copy and paste the content of ```Images``` folder of the unzipped dataset in ```your-folder/datasets/PASCAL3D+/images```.
 5) Copy and paste ```PASCAL/VOCdevkit/VOC2012/SegmentationClass``` folder of the unzipped dataset in ```your-folder/datasets/PASCAL3D+```.
 6) Copy and paste ```PASCAL/VOCdevkit/VOC2012/SegmentationObject``` folder of the unzipped dataset in ```your-folder/datasets/PASCAL3D+```.
-7) Download the [annotations/masks]((https://ailb-web.ing.unimore.it/publicfiles/drive/3DV%202021%20-%20mcmr/PASCAL_data.zip) folder and unzip it into ```your-folder/datasets/PASCAL3D+```. 
+7) Download the [annotations/masks](https://ailb-web.ing.unimore.it/publicfiles/drive/3DV%202021%20-%20mcmr/PASCAL_data.zip) folder and unzip it into ```your-folder/datasets/PASCAL3D+```. 
 
 At the end you should obtain a ```your-folder/datasets/PASCAL3D+``` directory organized as follows:
 ```
