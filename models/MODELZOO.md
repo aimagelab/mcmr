@@ -18,7 +18,7 @@ Released pre-trained models for all main paper experiments.
 <td align="center">GT + MaskRCNN</td>
 <td align="center">Table 2</td>
 <td align="center">0.460</td>
-<td align="center"><a href="https://drive.google.com/file/d/1XZIpDJNyPQa3IFDaDiqFf8ClCSUK0Ck_/view?usp=sharing">model</a></td>
+<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_2/aeroplane_8_meanshapes/net_latest.pth">model</a></td>
 </tr>
 <!-- ROW: car 10 meanshapes -->
 <tr>
@@ -27,7 +27,7 @@ Released pre-trained models for all main paper experiments.
 <td align="center">GT + MaskRCNN</td>
 <td align="center">Table 2</td>
 <td align="center">0.684</td>
-<td align="center"><a href="https://drive.google.com/file/d/1r03Ci63J5FpyDxsGYOva_DSYqNw15MLQ/view?usp=sharing">model</a></td>
+<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_2/car_10_meanshapes/net_latest.pth">model</a></td>
 </tr>
 <!-- ROW: aeroplane+car 2 meanshapes -->
 <tr>
@@ -36,7 +36,7 @@ Released pre-trained models for all main paper experiments.
 <td align="center">GT + MaskRCNN</td>
 <td align="center">Table 2</td>
 <td align="center">0.567</td>
-<td align="center"><a href="https://drive.google.com/file/d/1m2ff_wkPEh1hLN-hsBoXCMmcjxlbs6p2/view?usp=sharing">model</a></td>
+<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_2/aereoplane_car_2_meanshapes/net_latest.pth">model</a></td>
 </tr>
 <!-- ROW: aeroplane+car 1 meanshape -->
 <tr>
@@ -45,7 +45,7 @@ Released pre-trained models for all main paper experiments.
 <td align="center">GT + PointRend</td>
 <td align="center">Table 4</td>
 <td align="center">0.532</td>
-<td align="center"><a href="https://drive.google.com/file/d/18xEQC500Yp_nIt-WHMYpx7mDbITYf9hd/view?usp=sharing">model</a></td>
+<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_4/aeroplane_car_1_meanshape/net_latest.pth">model</a></td>
 </tr>
 <!-- ROW: aeroplane+car 2 meanshapes -->
 <tr>
@@ -54,7 +54,7 @@ Released pre-trained models for all main paper experiments.
 <td align="center">GT + PointRend</td>
 <td align="center">Table 4</td>
 <td align="center">0.552</td>
-<td align="center"><a href="https://drive.google.com/file/d/14e4oi2nUfxSauRgG5BaNxPG_Rjwm_hkV/view?usp=sharing">model</a></td>
+<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_4/aeroplane_car_2_meanshapes/net_latest.pth">model</a></td>
 </tr>
 <!-- ROW: bicycle+bus+car+motorbike classes 1 meanshape -->
 <tr>
@@ -63,7 +63,7 @@ Released pre-trained models for all main paper experiments.
 <td align="center">GT + PointRend</td>
 <td align="center">Table 4</td>
 <td align="center">0.517</td>
-<td align="center"><a href="https://drive.google.com/file/d/1dAetRjglUnjbeCUbEa5uC0P8gorqPssN/view?usp=sharing">model</a></td>
+<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_4/bicycle_bus_car_motorbike_1_meanshape/net_latest.pth">model</a></td>
 </tr>
 <!-- ROW: bicycle+bus+car+motorbike classes 4 meanshapes -->
 <tr>
@@ -72,7 +72,7 @@ Released pre-trained models for all main paper experiments.
 <td align="center">GT + PointRend</td>
 <td align="center">Table 4</td>
 <td align="center">0.543</td>
-<td align="center"><a href="https://drive.google.com/file/d/1TFKrxbH_bCxvt75wIZqWIxrzTnRtxVdU/view?usp=sharing">model</a></td>
+<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_4/bicycle_bus_car_motorbike_4_meanshapes/net_latest.pth">model</a></td>
 </tr>
 <!-- ROW: 12 Pascal3D+ classes 1 meanshape -->
 <tr>
@@ -81,7 +81,7 @@ Released pre-trained models for all main paper experiments.
 <td align="center">GT + PointRend</td>
 <td align="center">Table 4</td>
 <td align="center">0.409</td>
-<td align="center"><a href="https://drive.google.com/file/d/13XuQ4A7cunDZQ4w-GwLqzNyvttQxXhAY/view?usp=sharing">model</a></td>
+<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_4/12_pascal_classes_1_meanshape/net_latest.pth">model</a></td>
 </tr>
 <!-- ROW: 12 Pascal3D+ classes 12 meanshapes -->
 <tr>
@@ -90,7 +90,7 @@ Released pre-trained models for all main paper experiments.
 <td align="center">GT + PointRend</td>
 <td align="center">Table 4</td>
 <td align="center">0.425</td>
-<td align="center"><a href="https://drive.google.com/file/d/1AbAMASl62PJCNkG7VrpOOgyZI9JSeY2o/view?usp=sharing">model</a></td>
+<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_4/12_pascal_classes_12_meanshape/net_latest.pth">model</a></td>
 </tr>
 </tbody>
 </table>
@@ -115,7 +115,7 @@ To compute the 3D IoU metric for Pascal3D+, click [here](https://drive.google.co
 <td align="center">GT</td>
 <td align="center">Table 3</td>
 <td align="center">0.658</td>
-<td align="center"><a href="https://drive.google.com/file/d/1Nz5sZS7kXWqX1A2_g3LyzQzsb8AoOiwz/view?usp=sharing">model</a></td>
+<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_3/CUB_1_meanshape/net_latest.pth">model</a></td>
 </tr>
 <!-- ROW: bird 14 meanshape -->
 <tr>
@@ -124,7 +124,7 @@ To compute the 3D IoU metric for Pascal3D+, click [here](https://drive.google.co
 <td align="center">GT</td>
 <td align="center">Table 3</td>
 <td align="center">0.642</td>
-<td align="center"><a href="https://drive.google.com/file/d/1PtKRzgGO7CrpIehBlWipj2SRPPBKTD10/view?usp=sharing">model</a></td>
+<td align="center"><a href="https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/pretrained_weights/Table_3/CUB_14_meanshape/net_latest.pth">model</a></td>
 </tr>
 </tbody>
 </table>
