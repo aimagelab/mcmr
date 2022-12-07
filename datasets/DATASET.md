@@ -3,7 +3,7 @@ Create a ```your-folder/datasets``` directory.
 
 ## CUB
 1) Download [CUB](http://www.vision.caltech.edu/visipedia-data/CUB-200-2011/CUB_200_2011.tgz) dataset and unzip it in ```your-folder/datasets```.
-2) Download annotations from [U-CMR](https://github.com/shubham-goel/ucmr) using this [link](https://ailb-web.ing.unimore.it/publicfiles/drive/3DV 2021 - mcmr/UCMR_CUB_data.zip) and unzip them in ```your-folder/datasets```.
+2) Download annotations from [U-CMR](https://github.com/shubham-goel/ucmr) using this [link](https://ailb-web.ing.unimore.it/publicfiles/drive/3DV%202021%20-%20mcmr/UCMR_CUB_data.zip) and unzip them in ```your-folder/datasets```.
 
 At the end you should obtain a ```your-folder/datasets``` directory organized as follows:
 ```
